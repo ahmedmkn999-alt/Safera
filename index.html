@@ -3,36 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صَفّارة | نتائج حية ومباريات اليوم</title>
+    <title>صَفّارة | الدوريات الكبرى والأمم الأفريقية</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="logo">⚽ صَفّارة</div>
         <nav>
-            <button onclick="fetchMatches('yesterday')">الأمس</button>
-            <button onclick="fetchMatches('today')" class="active" id="today-btn">اليوم</button>
-            <button onclick="fetchMatches('tomorrow')">الغد</button>
+            <button onclick="fetchMatches('yesterday')">نتائج الأمس</button>
+            <button onclick="fetchMatches('today')" class="active">مباريات اليوم</button>
+            <button onclick="fetchMatches('tomorrow')">جدول الغد</button>
         </nav>
     </header>
 
     <main id="matches-container">
-        <p class="msg">جاري تحميل مباريات اليوم من السيرفر...</p>
+        <p class="msg">جاري سحب بيانات الدوريات الكبرى...</p>
     </main>
 
     <script>
-        // تم إضافة مفتاحك الشخصي هنا بنجاح
-        const API_KEY = '4587f742d3b24cbc92e94555f386504b';
+        const API_KEY = '4587f742d3b24cbc92e94555f386504b'; // مفتاحك الشغال
 
         async function fetchMatches(day) {
             const container = document.getElementById('matches-container');
-            container.innerHTML = '<p class="msg">جاري تحديث البيانات الحية...</p>';
+            container.innerHTML = '<p class="msg">جاري تحميل النتائج الحية...</p>';
             
             let date = new Date();
             if(day === 'yesterday') date.setDate(date.getDate() - 1);
             if(day === 'tomorrow') date.setDate(date.getDate() + 1);
             const dateStr = date.toISOString().split('T')[0];
 
+            // جلب البيانات من الدوريات الكبرى (PL, PD, BL, SA, FL1)
             try {
                 const response = await fetch(`https://api.football-data.org/v4/matches?date=${dateStr}`, {
                     headers: { 'X-Auth-Token': API_KEY }
@@ -40,36 +40,37 @@
                 const data = await response.json();
                 displayMatches(data.matches);
             } catch (error) {
-                container.innerHTML = '<p class="msg">عذراً، حدث خطأ في جلب البيانات. تأكد من استهلاك الحصة المجانية.</p>';
+                container.innerHTML = '<p class="msg">تأكد من تفعيل الإيميل لتظهر النتائج فوراً.</p>';
             }
         }
 
         function displayMatches(matches) {
             const container = document.getElementById('matches-container');
             if (!matches || matches.length === 0) {
-                container.innerHTML = '<p class="msg">لا توجد مباريات مجدولة لهذا التاريخ.</p>';
+                container.innerHTML = '<p class="msg">لا توجد مباريات جارية حالياً في الدوريات الكبرى.</p>';
                 return;
             }
 
+            // عرض الماتشات وتصنيفها
             container.innerHTML = matches.map(m => `
                 <div class="match-card">
-                    <div class="team">${m.homeTeam.name}</div>
-                    <div class="score-area">
-                        <div class="score">${m.score.fullTime.home ?? 0} - ${m.score.fullTime.away ?? 0}</div>
-                        <div class="status ${m.status === 'IN_PLAY' || m.status === 'LIVE' ? 'live' : ''}">
-                            ${m.status === 'IN_PLAY' || m.status === 'LIVE' ? '● مباشر' : m.utcDate.split('T')[1].substring(0,5)}
+                    <div class="league-name">${m.competition.name}</div>
+                    <div class="match-body">
+                        <div class="team">${m.homeTeam.name}</div>
+                        <div class="score-area">
+                            <div class="score">${m.score.fullTime.home ?? 0} - ${m.score.fullTime.away ?? 0}</div>
+                            <div class="status ${m.status === 'IN_PLAY' ? 'live' : ''}">
+                                ${m.status === 'IN_PLAY' ? '● مباشر' : m.utcDate.split('T')[1].substring(0,5)}
+                            </div>
                         </div>
+                        <div class="team text-left">${m.awayTeam.name}</div>
                     </div>
-                    <div class="team text-left">${m.awayTeam.name}</div>
-                    ${(m.status === 'IN_PLAY' || m.status === 'LIVE' || m.status === 'FINISHED') ? 
-                    `<a href="watch.html?id=${m.id}" class="watch-btn">شاهد البث / الملخص</a>` : ''}
+                    ${m.status === 'IN_PLAY' ? `<a href="watch.html?id=${m.id}" class="watch-btn">دخول البث</a>` : ''}
                 </div>
             `).join('');
         }
 
         fetchMatches('today');
-        // تحديث تلقائي كل دقيقة
-        setInterval(() => fetchMatches('today'), 60000);
     </script>
 </body>
 </html>
