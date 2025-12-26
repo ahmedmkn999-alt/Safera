@@ -3,53 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صَفّارة | الأرشيف والجدول الشامل</title>
+    <title>صَفّارة | أرشيف وجدول المباريات الكامل</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .day-section { background: #1e1e1e; padding: 10px; margin-top: 20px; border-bottom: 2px solid #e63946; color: #ffca28; font-weight: bold; }
-        .league-name { color: #888; font-size: 0.8em; margin-bottom: 5px; display: block; }
-        .match-card { border-right: 4px solid #e63946; margin-bottom: 8px; }
+        .day-title { background: #333; color: #ffca28; padding: 10px; margin: 20px 0 10px 0; border-right: 5px solid #e63946; font-size: 16px; }
+        .league-name { color: #888; font-size: 0.8em; font-weight: bold; margin-bottom: 5px; display: block; }
+        .match-card { margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; }
+        .final-score { color: #e63946; font-weight: bold; }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">⚽ صَفّارة</div>
-        <p>تغطية شاملة: الأمم الأفريقية - الدوريات الكبرى - الدوري المصري</p>
+        <p>الأمم الأفريقية | الدوريات الكبرى | الدوري المصري</p>
     </header>
 
     <main>
-        <div class="day-section">📅 نتائج أول أمس (24 ديسمبر)</div>
+        <div class="day-title">📅 نتائج يوم 24 ديسمبر (قبل يومين)</div>
         <div class="match-card">
             <span class="league-name">كأس الرابطة الإنجليزية</span>
             <div class="match-body">
                 <div class="team">ليفربول</div>
-                <div class="score-area"><div class="score">3 - 1</div><div class="status">انتهت</div></div>
+                <div class="score-area"><div class="final-score">3 - 1</div><div class="status">انتهت</div></div>
                 <div class="team text-left">أرسنال</div>
             </div>
         </div>
-
-        <div class="day-section">📅 نتائج أمس (25 ديسمبر)</div>
         <div class="match-card">
-            <span class="league-name">الدوري المصري الممتاز</span>
+            <span class="league-name">الدوري المصري</span>
+            <div class="match-body">
+                <div class="team">الزمالك</div>
+                <div class="score-area"><div class="final-score">1 - 0</div><div class="status">انتهت</div></div>
+                <div class="team text-left">المصري</div>
+            </div>
+        </div>
+
+        <div class="day-title">📅 نتائج أمس 25 ديسمبر</div>
+        <div class="match-card">
+            <span class="league-name">الدوري المصري</span>
             <div class="match-body">
                 <div class="team">الأهلي</div>
-                <div class="score-area"><div class="score">2 - 0</div><div class="status">انتهت</div></div>
+                <div class="score-area"><div class="final-score">2 - 0</div><div class="status">انتهت</div></div>
                 <div class="team text-left">سموحة</div>
             </div>
         </div>
-
-        <div class="day-section">🔴 مباريات اليوم (26 ديسمبر)</div>
         <div class="match-card">
-            <span class="league-name">الدوري الإنجليزي الممتاز</span>
+            <span class="league-name">الدوري السعودي</span>
             <div class="match-body">
-                <div class="team">مانشستر سيتي</div>
-                <div class="score-area"><div class="score">0 - 0</div><div class="status live">● جارية الآن</div></div>
-                <div class="team text-left">تشيلسي</div>
+                <div class="team">النصر</div>
+                <div class="score-area"><div class="final-score">4 - 1</div><div class="status">انتهت</div></div>
+                <div class="team text-left">التعاون</div>
             </div>
-            <a href="watch.html?id=live1" class="watch-btn">دخول البث المباشر</a>
         </div>
 
-        <div class="day-section">📅 مباريات غداً (27 ديسمبر)</div>
+        <div class="day-title">🔴 مباريات اليوم 26 ديسمبر (Boxing Day)</div>
+        <div class="match-card">
+            <span class="league-name">الدوري الإنجليزي</span>
+            <div class="match-body">
+                <div class="team">مانشستر سيتي</div>
+                <div class="score-area"><div class="score">0 - 0</div><div class="status live">● مباشر</div></div>
+                <div class="team text-left">تشيلسي</div>
+            </div>
+            <a href="watch.html?id=live1" class="watch-btn">شاهد البث الآن</a>
+        </div>
+
+        <div class="day-title">📅 مباريات غداً 27 ديسمبر</div>
         <div class="match-card">
             <span class="league-name">الدوري الإسباني</span>
             <div class="match-body">
@@ -59,28 +76,20 @@
             </div>
         </div>
 
-        <div class="day-section">📅 مباريات بعد غد (28 ديسمبر)</div>
+        <div class="day-title">📅 مباريات 28 ديسمبر (بعد يومين)</div>
         <div class="match-card">
-            <span class="league-name">الأمم الأفريقية (تصفيات/وديات)</span>
+            <span class="league-name">تصفيات أمم أفريقيا</span>
             <div class="match-body">
-                <div class="team">الجزائر</div>
-                <div class="score-area"><div class="score">vs</div><div class="status">الساعة 19:00</div></div>
-                <div class="team text-left">نيجيريا</div>
-            </div>
-        </div>
-        
-        <div class="match-card">
-            <span class="league-name">الدوري السعودي (دوري روشن)</span>
-            <div class="match-body">
-                <div class="team">الهلال</div>
+                <div class="team">المغرب</div>
                 <div class="score-area"><div class="score">vs</div><div class="status">الساعة 20:00</div></div>
-                <div class="team text-left">الاتحاد</div>
+                <div class="team text-left">كوت ديفوار</div>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>© 2025 موقع صَفّارة - التغطية الأدق للكرة العربية والعالمية</p>
+        <p>© 2025 موقع صَفّارة | تم التحديث يدوياً</p>
     </footer>
 </body>
-</html>
+            </html>
+    
