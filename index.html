@@ -3,95 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صَفّارة | جدول المباريات اليدوي</title>
+    <title>صَفّارة | الدوريات والبطولات</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .section-header { background: #e63946; color: white; padding: 12px; margin: 20px 0 10px 0; border-radius: 8px; font-weight: bold; text-align: center; }
-        .league-name { color: #aaa; font-size: 0.85em; font-weight: bold; margin-bottom: 5px; display: block; }
-        .match-card { background: #1e1e1e; border: 1px solid #333; margin-bottom: 12px; border-radius: 10px; overflow: hidden; padding: 15px; }
-        .score-display { font-size: 20px; font-weight: bold; color: #ffca28; }
-        .status-badge { font-size: 12px; color: #888; margin-top: 5px; }
-        .status-badge.live { color: #00ff00; }
+        .league-container { margin: 15px 10px; border-radius: 12px; overflow: hidden; background: #1e1e1e; border: 1px solid #333; }
+        .league-header { background: #e63946; color: white; padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .league-content { display: none; padding: 10px; background: #121212; }
+        .day-tag { background: #333; color: #ffca28; padding: 5px 10px; font-size: 12px; border-radius: 5px; margin-bottom: 10px; display: inline-block; }
+        .match-card { background: #1e1e1e; border: 1px solid #333; margin-bottom: 10px; padding: 12px; border-radius: 8px; }
+        .active-content { display: block; }
     </style>
 </head>
 <body>
-    <header style="text-align: center; padding: 20px; background: #1e1e1e; border-bottom: 2px solid #e63946;">
+    <header style="text-align: center; padding: 20px; border-bottom: 2px solid #e63946;">
         <h1 style="color: #e63946; margin: 0;">⚽ صَفّارة</h1>
-        <p style="font-size: 14px; color: #ccc;">تغطية شاملة لكل الدوريات (تحديث يدوي)</p>
+        <p style="color: #888; font-size: 13px;">اختر الدوري لعرض كافة المباريات (الأمس - اليوم - الغد)</p>
     </header>
 
-    <main style="padding: 10px;">
-
-        <div class="section-header">📅 أول أمس (24 ديسمبر)</div>
-        <div class="match-card">
-            <span class="league-name">كأس الرابطة الإنجليزية</span>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="width: 35%;">ليفربول</div>
-                <div style="text-align: center;">
-                    <div class="score-display">3 - 1</div>
-                    <div class="status-badge">انتهت</div>
-                </div>
-                <div style="width: 35%; text-align: left;">أرسنال</div>
+    <main>
+        <div class="league-container">
+            <div class="league-header" onclick="toggleLeague('england')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 الدوري الإنجليزي الممتاز <span>▼</span></div>
+            <div class="league-content" id="england">
+                <span class="day-tag">الأمس (25 ديسمبر)</span>
+                <div class="match-card">ليفربول 3 - 1 أرسنال (انتهت)</div>
+                
+                <span class="day-tag">اليوم (26 ديسمبر)</span>
+                <div class="match-card">مانشستر سيتي 1 - 1 تشيلسي (جارية الآن) <a href="watch.html" style="color:#e63946; float:left">بث مباشر</a></div>
+                
+                <span class="day-tag">الغد (27 ديسمبر)</span>
+                <div class="match-card">مانشستر يونايتد vs نيوكاسل (20:00)</div>
             </div>
         </div>
 
-        <div class="section-header">📅 أمس (25 ديسمبر)</div>
-        <div class="match-card">
-            <span class="league-name">الدوري المصري</span>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="width: 35%;">الأهلي</div>
-                <div style="text-align: center;">
-                    <div class="score-display">2 - 0</div>
-                    <div class="status-badge">انتهت</div>
-                </div>
-                <div style="width: 35%; text-align: left;">سموحة</div>
+        <div class="league-container">
+            <div class="league-header" onclick="toggleLeague('egypt')">🇪🇬 الدوري المصري الممتاز <span>▼</span></div>
+            <div class="league-content" id="egypt">
+                <span class="day-tag">الأمس (25 ديسمبر)</span>
+                <div class="match-card">الأهلي 2 - 0 سموحة (انتهت)</div>
+                <div class="match-card">بيراميدز 1 - 1 فيوتشر (انتهت)</div>
+
+                <span class="day-tag">اليوم (26 ديسمبر)</span>
+                <div class="match-card">الزمالك vs الجونة (19:00)</div>
+
+                <span class="day-tag">الغد (27 ديسمبر)</span>
+                <div class="match-card">المصري vs الاتحاد (17:00)</div>
             </div>
         </div>
 
-        <div class="section-header">🔴 مباريات اليوم (26 ديسمبر)</div>
-        <div class="match-card">
-            <span class="league-name">الدوري الإنجليزي الممتاز</span>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="width: 35%;">مانشستر سيتي</div>
-                <div style="text-align: center;">
-                    <div class="score-display">1 - 1</div>
-                    <div class="status-badge live">● جارية الآن (الدقيقة 60)</div>
-                </div>
-                <div style="width: 35%; text-align: left;">تشيلسي</div>
-            </div>
-            <a href="watch.html?id=live1" style="display: block; background: #e63946; color: white; text-align: center; text-decoration: none; padding: 8px; margin-top: 10px; border-radius: 5px;">شاهد البث المباشر</a>
-        </div>
+        <div class="league-container">
+            <div class="league-header" onclick="toggleLeague('africa')">🏆 الأمم الأفريقية (تصفيات/وديات) <span>▼</span></div>
+            <div class="league-content" id="africa">
+                <span class="day-tag">اليوم (26 ديسمبر)</span>
+                <div class="match-card">المغرب 2 - 0 تنزانيا (انتهت)</div>
 
-        <div class="section-header">📅 غداً (27 ديسمبر)</div>
-        <div class="match-card">
-            <span class="league-name">الدوري الإسباني</span>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="width: 35%;">ريال مدريد</div>
-                <div style="text-align: center;">
-                    <div class="score-display">vs</div>
-                    <div class="status-badge">الساعة 22:00</div>
-                </div>
-                <div style="width: 35%; text-align: left;">إشبيلية</div>
+                <span class="day-tag">الغد (27 ديسمبر)</span>
+                <div class="match-card">الجزائر vs نيجيريا (21:00)</div>
             </div>
         </div>
 
-        <div class="section-header">📅 بعد غد (28 ديسمبر)</div>
-        <div class="match-card">
-            <span class="league-name">أمم أفريقيا (مباريات ودية)</span>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="width: 35%;">الجزائر</div>
-                <div style="text-align: center;">
-                    <div class="score-display">vs</div>
-                    <div class="status-badge">الساعة 19:00</div>
-                </div>
-                <div style="width: 35%; text-align: left;">نيجيريا</div>
+        <div class="league-container">
+            <div class="league-header" onclick="toggleLeague('spain')">🇪🇸 الدوري الإسباني (لا ليجا) <span>▼</span></div>
+            <div class="league-content" id="spain">
+                <span class="day-tag">الغد (27 ديسمبر)</span>
+                <div class="match-card">ريال مدريد vs إشبيلية (22:00)</div>
+                <div class="match-card">برشلونة vs فالنسيا (20:00)</div>
             </div>
         </div>
-
     </main>
 
-    <footer style="text-align: center; color: #666; font-size: 12px; margin-top: 30px;">
-        <p>© 2025 موقع صَفّارة | تم التحديث يدوياً بواسطة الفريق</p>
-    </footer>
+    <script>
+        function toggleLeague(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+    </script>
 </body>
-</html>
+    </html>
+    
