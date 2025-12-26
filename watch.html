@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صَفّارة | البث المباشر</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: #000;">
+    <div class="watch-container">
+        <header>
+            <a href="index.html" class="back-link">⬅ عودة للجدول</a>
+            <h2>بث مباشر عبر صَفّارة</h2>
+        </header>
+
+        <div class="player-box">
+            <iframe id="video-frame" src="" frameborder="0" width="100%" height="100%" allowfullscreen allow="autoplay"></iframe>
+        </div>
+
+        <div class="ads-sim">
+            <p>إذا توقف البث، قم بتحديث الصفحة. موقع صَفّارة يجمع لك المصادر تلقائياً.</p>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get('id');
+        
+        if(matchId) {
+            // استخدام رابط الـ Embed التلقائي من ScoreBat
+            document.getElementById('video-frame').src = `https://www.scorebat.com/embed/g/${matchId}/`;
+        }
+    </script>
+</body>
+</html>
