@@ -17,15 +17,16 @@
     </header>
 
     <main id="matches-container">
-        <p class="msg">جاري تحميل مباريات اليوم...</p>
+        <p class="msg">جاري تحميل مباريات اليوم من السيرفر...</p>
     </main>
 
     <script>
+        // تم إضافة مفتاحك الشخصي هنا بنجاح
         const API_KEY = '4587f742d3b24cbc92e94555f386504b';
 
         async function fetchMatches(day) {
             const container = document.getElementById('matches-container');
-            container.innerHTML = '<p class="msg">جاري جلب البيانات...</p>';
+            container.innerHTML = '<p class="msg">جاري تحديث البيانات الحية...</p>';
             
             let date = new Date();
             if(day === 'yesterday') date.setDate(date.getDate() - 1);
@@ -39,14 +40,14 @@
                 const data = await response.json();
                 displayMatches(data.matches);
             } catch (error) {
-                container.innerHTML = '<p class="msg">حدث خطأ، تأكد من اتصال الإنترنت.</p>';
+                container.innerHTML = '<p class="msg">عذراً، حدث خطأ في جلب البيانات. تأكد من استهلاك الحصة المجانية.</p>';
             }
         }
 
         function displayMatches(matches) {
             const container = document.getElementById('matches-container');
             if (!matches || matches.length === 0) {
-                container.innerHTML = '<p class="msg">لا توجد مباريات مجدولة لهذا اليوم.</p>';
+                container.innerHTML = '<p class="msg">لا توجد مباريات مجدولة لهذا التاريخ.</p>';
                 return;
             }
 
@@ -55,18 +56,20 @@
                     <div class="team">${m.homeTeam.name}</div>
                     <div class="score-area">
                         <div class="score">${m.score.fullTime.home ?? 0} - ${m.score.fullTime.away ?? 0}</div>
-                        <div class="status ${m.status === 'IN_PLAY' ? 'live' : ''}">
-                            ${m.status === 'IN_PLAY' ? '● مباشر' : m.utcDate.split('T')[1].substring(0,5)}
+                        <div class="status ${m.status === 'IN_PLAY' || m.status === 'LIVE' ? 'live' : ''}">
+                            ${m.status === 'IN_PLAY' || m.status === 'LIVE' ? '● مباشر' : m.utcDate.split('T')[1].substring(0,5)}
                         </div>
                     </div>
                     <div class="team text-left">${m.awayTeam.name}</div>
-                    ${m.status === 'IN_PLAY' || m.status === 'FINISHED' ? 
-                    `<a href="watch.html?id=${m.id}" class="watch-btn">شاهد الآن</a>` : ''}
+                    ${(m.status === 'IN_PLAY' || m.status === 'LIVE' || m.status === 'FINISHED') ? 
+                    `<a href="watch.html?id=${m.id}" class="watch-btn">شاهد البث / الملخص</a>` : ''}
                 </div>
             `).join('');
         }
 
         fetchMatches('today');
+        // تحديث تلقائي كل دقيقة
+        setInterval(() => fetchMatches('today'), 60000);
     </script>
 </body>
 </html>
